@@ -17,4 +17,14 @@ describe("Query params", () => {
   it("returns 200 if we have the correct login credentials", async () => {
     await request(app).get("/login?username=foo&password=bar").expect(200);
   });
+
+  // pagination can be achieved easily when using query parameters
+  it("returns a list of users with the correct length", async () => {
+    const res = await request(app).get("/users/?limit=1&offset=1").expect(200);
+    const body = res.body;
+
+    expect(Array.isArray(body)).toEqual(true);
+    expect(body.length).toEqual(1);
+    expect(body[0].name).toEqual("Anna");
+  });
 });

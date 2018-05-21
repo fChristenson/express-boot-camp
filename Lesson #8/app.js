@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 
 /**
@@ -26,6 +25,22 @@ app.get("/login", (req, res) => {
     res.status(200).end();
   }
   res.status(400).end();
+});
+
+const users = {
+  bob: {
+    name: "Bob"
+  },
+  anna: {
+    name: "Anna"
+  }
+};
+
+app.get("/users", (req, res) => {
+  const len = req.query.limit ? parseInt(req.query.limit) + 1 : users.length;
+  const offset = req.query.offset ? parseInt(req.query.offset) : 0;
+  const results = Object.values(users).slice(offset, len);
+  res.json(results);
 });
 
 module.exports = app;

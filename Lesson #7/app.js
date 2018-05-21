@@ -1,10 +1,9 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 
 // we need this to be able to send JSON to the server
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 /**
  * If we want to tell the client that they tried to do
