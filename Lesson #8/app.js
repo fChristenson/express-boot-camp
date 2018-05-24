@@ -37,9 +37,13 @@ const users = {
 };
 
 app.get("/users", (req, res) => {
-  const len = req.query.limit ? parseInt(req.query.limit) + 1 : users.length;
-  const offset = req.query.offset ? parseInt(req.query.offset) : 0;
-  const results = Object.values(users).slice(offset, len);
+  const lenInt = parseInt(req.query.limit);
+  const offsetInt = parseInt(req.query.offset);
+  const len = lenInt > 0 ? lenInt : users.length;
+  const offset = offsetInt > 0 ? offsetInt : 0;
+  const results = Object.values(users)
+    .slice(offset, users.length)
+    .slice(0, len);
   res.json(results);
 });
 
