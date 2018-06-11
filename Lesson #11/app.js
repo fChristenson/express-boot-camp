@@ -40,7 +40,7 @@ const isLoggedIn = (req, res, next) => {
 };
 
 app.get("/welcome", isLoggedIn, (req, res) => {
-  res.json({ message: "Bob was removed" });
+  res.json({ message: "welcome" });
 });
 
 module.exports = app;
